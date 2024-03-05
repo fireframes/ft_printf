@@ -6,80 +6,62 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:37:28 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/04 23:48:40 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/05 23:10:20 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdarg.h>
+#include "libftprintf.h"
 
-
-char	*ft_strchr(const char *s, int c)
+int	print_spec_type(char type, va_list *args)
 {
-	unsigned int	i;
+	int	ch_out;
 
+	ch_out = 0;
+	if (type == 'c')
+		ch_out = ft_putchar_fd(va_arg(*args, int), 1);
+	else if (type == 's')
+		ch_out = ft_putstr_fd(va_arg(*args, char *), 1);
+	else if (type == 'p')
+		ch_out = ft_putaddr_fd(va_arg(*args, void *), 1);
+	else if (type == 'd')
+		ch_out = ft_putnbr_fd(va_arg(*args, int), 1);
+	else if (type == 'i')
+		ch_out = ft_putnbr_base_fd(va_arg(*args, int), "0123456789", 1);
+	else if (type == 'u')
+		ch_out = ft_putnbr_uint_fd(va_arg(*args, unsigned int), 1);
+	else if (type == 'x')
+		ch_out = ft_putnbr_base_fd(va_arg(*args, int), "0123456789abcdef", 1);
+	else if (type == 'X')
+		ch_out = ft_putnbr_base_fd(va_arg(*args, int), "0123456789ABCDEF", 1);
+	else if (type == '%')
+		ch_out = ft_putchar_fd('%', 1);
+	return (ch_out);
+}
+
+int	ft_printf(const char *format, ...)
+{
+	va_list	args;
+	char	*set;
+	char	type;
+	int		ch_out;
+	int		i;
+
+	set = "cspdiuxX%";
+	va_start(args, format);
 	i = 0;
-	while (s[i])
+	ch_out = 0;
+	while (format[i] != '\0')
 	{
-		if (s[i] == (char) c)
-			return ((char *) &s[i]);
+		if (format[i] == '%' && ft_strchr(set, format[i + 1]))
+		{
+			i++;
+			type = ft_strchr(set, format[i])[0];
+			ch_out += print_spec_type(type, &args);
+		}
+		else
+			ch_out += ft_putchar_fd(format[i], 1);
 		i++;
 	}
-	if (s[i] == (char) c)
-		return ((char *) &s[i]);
-	return (0);
-}
-
-int ft_printf(const char *format);//, ...);
-
-int main(void)
-{
-    const char *input;
-    int ft = 42;
-    char ai = 'i';
-    char *s = "Now";
-    
-    input = " The %d life %cs % %incredible! %s\n";
-
-    printf(input, ft, ai, s);
-    printf(" The %d life %cs % %incredible! %s\n", ft, ai, s);
-
-    int argc = ft_printf(input);
-    printf("Argc : %d\n", argc);
-    return (0);
-}
-
-int ft_printf(const char *format)//, ...)
-{
-    int i;
-    int argc;
-    // int len_out;
-    char type;
-    char *set = "cspdiuxX%";
-
-    i = 0;
-    argc = 0;
-    // len_out = 0;
-    while (format[i] != '\0')
-    {
-        if (format[i] == '%')
-        {
-            int j = 1;
-            while (format[i + j] == ' ')
-                j++;
-            if (ft_strchr(set, format[i + j]))
-            {
-                type = ft_strchr(set, format[i + j])[0];
-                printf("type: %c\n", type);
-                // Maybe use ft_split?? 
-                // Make found types linked list? char type variable + char *fornat specifier- address
-                // Or get 2 pointers = *start = % + *end = specifier
-                             
-                argc++;
-            }
-            i += j;
-        }
-        i++;
-    }
-    return (argc);
+	va_end(args);
+	return (ch_out);
 }
