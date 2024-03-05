@@ -1,2 +1,3 @@
 # ft_printf
-42 ft_printf project
+
+https://cdn.intra.42.fr/pdf/pdf/125481/en.subject.pdf
