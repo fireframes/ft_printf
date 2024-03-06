@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	print_addr(uintptr_t addr, char *base, char *num_arr, int fd)
 {
@@ -44,7 +44,10 @@ int	ft_putaddr_fd(void *ptr, int fd)
 	uintptr_t	addr;
 
 	if (ptr == NULL)
-		return (0);
+	{
+		write(fd, "(nil)", 5);
+		return (5);
+	}
 	addr = (uintptr_t)ptr;
 	base = "0123456789abcdef";
 	cnt = 0;

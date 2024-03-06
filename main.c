@@ -6,57 +6,49 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 13:23:18 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/05 22:59:32 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/06 22:51:37 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <string.h>
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int main(void)
 {
-	// const char *input;
-	int 			ft = 42243;
-	unsigned int	max = UINT_MAX;
-	int diff = 0;
-	char ch = 'i';
-	char *s = "Now";
+	int ft = -1123;
+	// unsigned int	max = UINT_MAX;
+	// int diff = 0;
+	// char ch = 'i';
+	// char *s = "Now";
 	// char *s2 = "Wow";
 
 	// input = "%s The %d life %cs %%incredible! %s\n";
 	// input = "\0";
 
-
-	// printf(" The %d life %cs % %incredible! %s\n", ft, ai, s);
-	int char_cnt = ft_printf("%p, %x, %c, %s, %%, %u\n", s, ft, diff, &ch, max);
-	int check_org = printf("%p, %x, %c, %s, %%, %u\n", s, ft, diff, &ch, max);
-
+// //
+	int char_cnt = ft_printf("%X\n", ft);
+	int check_org = printf("%X\n", ft);
+	// int char_cnt = ft_printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+	// printf("\n");
+	// int check_org = printf("%%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %%%c%%%s%%%d%%%i%%%u%%%x%%%X%%%% %c%%", 'A', "42", 42, 42 ,42 , 42, 42, 'B', "-42", -42, -42 ,-42 ,-42, 42, 'C', "0", 0, 0 ,0 ,0, 42, 0);
+	// printf("\n");
 	printf("custom work  : %d\n", char_cnt);
 	printf("original work: %d\n", check_org);
 
 	return (0);
 }
+// #include <stdio.h>
 
-// NOT WORKING WITH NEGATIVE HEX
+// int main() {
+//     unsigned int hexadecimal_number = 0x7fffffd6; // Given hexadecimal number
+//     int twos_complement;
 
-// putnbr functions are too big
+//     // Reinterpret the hexadecimal number as a signed integer
+//     twos_complement = (int)(signed char)hexadecimal_number;
 
+//     printf("Original hexadecimal number: %x\n", hexadecimal_number);
+//     printf("2's complement representation: %x\n", twos_complement);
 
-/*
-
-ft_putnbr_fd.c: Error!
-Error: TOO_MANY_LINES       (line:  74, col:   1):      Function has more than 25 lines
-ft_putstr_fd.c: Error!
-Error: SPACE_REPLACE_TAB    (line:  17, col:   9):      Found space when expecting tab
-Error: EMPTY_LINE_FUNCTION  (line:  22, col:   1):      Empty line in function
-ft_strchr.c: OK!
-libftprintf.h: Error!
-Error: MISSING_IDENTIFIER   (line:  28, col:  29):      missing type qualifier or identifier in function arguments
-ft_putchar_fd.c: OK!
-ft_putnbr_uint_fd.c: OK!
-ft_putnbr_base_fd.c: OK!
-ft_putaddr_fd.c: Error!
-Error: SPACE_REPLACE_TAB    (line:  44, col:  14):      Found space when expecting tab
-Error: MISALIGNED_VAR_DECL  (line:  44, col:  15):      Misaligned variable declaration
-*/
+//     return 0;
+// }

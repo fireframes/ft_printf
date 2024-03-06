@@ -6,11 +6,11 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:37:11 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/05 23:00:21 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/06 15:25:32 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	ft_putstr_fd(char *s, int fd)
 {

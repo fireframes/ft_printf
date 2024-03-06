@@ -6,11 +6,11 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:37:28 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/05 23:10:20 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:58:50 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
 int	print_spec_type(char type, va_list *args)
 {
@@ -26,13 +26,13 @@ int	print_spec_type(char type, va_list *args)
 	else if (type == 'd')
 		ch_out = ft_putnbr_fd(va_arg(*args, int), 1);
 	else if (type == 'i')
-		ch_out = ft_putnbr_base_fd(va_arg(*args, int), "0123456789", 1);
+		ch_out = ft_putnbr_fd(va_arg(*args, int), 1);
 	else if (type == 'u')
-		ch_out = ft_putnbr_uint_fd(va_arg(*args, unsigned int), 1);
+		ch_out = ft_putuint_fd(va_arg(*args, unsigned int), 1);
 	else if (type == 'x')
-		ch_out = ft_putnbr_base_fd(va_arg(*args, int), "0123456789abcdef", 1);
+		ch_out = ft_puthex_fd(va_arg(*args, int), "0123456789abcdef", 1);
 	else if (type == 'X')
-		ch_out = ft_putnbr_base_fd(va_arg(*args, int), "0123456789ABCDEF", 1);
+		ch_out = ft_puthex_fd(va_arg(*args, int), "0123456789ABCDEF", 1);
 	else if (type == '%')
 		ch_out = ft_putchar_fd('%', 1);
 	return (ch_out);

@@ -13,7 +13,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	ar rcs $@ $?
 
-%.o: %.c libftprintf.h
+%.o: %.c
 	$(CC) $(CFLAGS) -c $?
 
 clean:
