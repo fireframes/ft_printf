@@ -48,7 +48,7 @@ int	ft_putaddr_fd(void *ptr, int fd)
 		write(fd, "(nil)", 5);
 		return (5);
 	}
-	addr = (uintptr_t)ptr;
+	addr = (uintptr_t) ptr;
 	base = "0123456789abcdef";
 	cnt = 0;
 	cnt += print_addr(addr, base, num_arr, fd);

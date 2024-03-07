@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/04 19:37:28 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/06 16:58:50 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:01:46 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ int	print_spec_type(char type, va_list *args)
 	else if (type == 'p')
 		ch_out = ft_putaddr_fd(va_arg(*args, void *), 1);
 	else if (type == 'd')
-		ch_out = ft_putnbr_fd(va_arg(*args, int), 1);
+		ch_out = ft_putdec_fd(va_arg(*args, int), "0123456789", 1);
 	else if (type == 'i')
-		ch_out = ft_putnbr_fd(va_arg(*args, int), 1);
+		ch_out = ft_putdec_fd(va_arg(*args, int), "0123456789", 1);
 	else if (type == 'u')
 		ch_out = ft_putuint_fd(va_arg(*args, unsigned int), 1);
 	else if (type == 'x')

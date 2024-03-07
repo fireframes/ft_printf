@@ -6,7 +6,7 @@
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:37:11 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/06 15:25:32 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:15:59 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@ int	ft_putstr_fd(char *s, int fd)
 {
 	char	*s0;
 
+	if (s == NULL)
+	{
+		write(fd, "(null)", 6);
+		return (6);
+	}
 	s0 = s;
 	while (*s)
 		write(fd, s++, 1);

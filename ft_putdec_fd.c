@@ -1,59 +1,63 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_uint_fd.c                                :+:      :+:    :+:   */
+/*   ft_putdec_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mmaksimo <mmaksimo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 20:20:13 by mmaksimo          #+#    #+#             */
-/*   Updated: 2024/03/05 22:36:13 by mmaksimo         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:15:29 by mmaksimo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-static int	count_pow(unsigned int num)
+int	print_dec(int nbr, char *base, char *num_arr, int fd)
 {
-	int		pow;
+	int	i;
+	int	len;
 
-	pow = 0;
-	while (num)
+	i = 0;
+	while (nbr)
 	{
-		num /= 10;
-		pow++;
+		num_arr[i] = base[nbr % 10];
+		nbr /= 10;
+		i++;
 	}
-	pow--;
-	return (pow);
+	num_arr[i] = '\0';
+	len = i;
+	i = 0;
+	while (i < len)
+	{
+		write(fd, &num_arr[len - i - 1], 1);
+		i++;
+	}
+	return (i);
 }
 
-static unsigned int	rec_pow(unsigned int base, int power)
+int	ft_putdec_fd(int nbr, char *base, int fd)
 {
-	if (power == 0)
-		return (1);
-	else
-		return (rec_pow(base, power - 1) * base);
-}
-
-int	ft_putnbr_uint_fd(unsigned int n, int fd)
-{
-	char	c;
-	int		pow;
+	char	num_arr[64];
 	int		cnt;
 
 	cnt = 0;
-	if (n == 0)
+	if (nbr == 0 || nbr == INT_MIN)
 	{
-		write(fd, "0", 1);
-		return (1);
+		if (nbr == 0)
+			write(fd, "0", 1);
+		else if (nbr == INT_MIN)
+		{
+			write(fd, "-2147483648", 11);
+			cnt = 10;
+		}
+		return (cnt + 1);
 	}
-	pow = count_pow(n);
-	cnt += pow + 1;
-	while (pow + 1)
+	else if (nbr < 0)
 	{
-		c = n / rec_pow(10, pow) + 48;
-		write(fd, &c, 1);
-		n %= rec_pow(10, pow);
-		pow--;
+		nbr *= -1;
+		write(fd, "-", 1);
+		cnt++;
 	}
+	cnt += print_dec(nbr, base, num_arr, fd);
 	return (cnt);
 }
